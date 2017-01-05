@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Example_swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xuw-Ug-fLx">
+                                <rect key="frame" x="158.5" y="438" width="57" height="24"/>
+                                <inset key="contentEdgeInsets" minX="5" minY="3" maxX="5" maxY="3"/>
+                                <state key="normal" title="Toggle"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="toggleIsPinchable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UPF-kk-dmp"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="landscape" translatesAutoresizingMaskIntoConstraints="NO" id="gKS-cM-1Ji">
+                                <rect key="frame" x="112.5" y="258" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="2RR-oY-8rV"/>
+                                    <constraint firstAttribute="width" secondItem="gKS-cM-1Ji" secondAttribute="height" id="a1f-jf-FAR"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="gKS-cM-1Ji" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="7cG-gJ-W7N"/>
+                            <constraint firstItem="gKS-cM-1Ji" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="LMY-c1-auD"/>
+                            <constraint firstItem="Xuw-Ug-fLx" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="RMS-16-ybD"/>
+                            <constraint firstItem="Xuw-Ug-fLx" firstAttribute="top" secondItem="gKS-cM-1Ji" secondAttribute="bottom" constant="30" id="fTx-uf-f3h"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="gKS-cM-1Ji" id="U3h-qG-wpc"/>
+                        <outlet property="toggleButton" destination="Xuw-Ug-fLx" id="M7k-vG-eZI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="landscape" width="960" height="633"/>
+    </resources>
+</document>
