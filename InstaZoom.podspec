@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "InstaZoom"
-  s.version          = "0.0.1"
+  s.version          = "0.0.2"
   s.summary          = "Replicate Instagram zooming feature."
   s.description      = <<-DESC
                             InstaZoom lets you replicate easily the Instagram zooming feature

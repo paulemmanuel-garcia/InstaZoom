@@ -9,6 +9,7 @@
 import UIKit
 
 import InstaZoom
+import UserNotifications
 
 extension UIColor {
     class var activated: UIColor {
