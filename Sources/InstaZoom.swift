@@ -16,6 +16,7 @@ public extension UIImageView {
         static var ImagePinchGestureKey: Int8 = 1
         static var ImagePanGestureKey: Int8 = 2
         static var ImageScaleKey: Int8 = 3
+        static var PinchCenterKey: Int8 = 4
     }
 
     /// The image should zoom on Pinch
@@ -70,8 +71,17 @@ public extension UIImageView {
             objc_setAssociatedObject(self, &AssociatedKeys.ImageScaleKey, newValue, .OBJC_ASSOCIATION_RETAIN)
         }
     }
-
-
+    
+    /// The center from which the image is pinched
+    private var pinchCenter: CGPoint {
+        get {
+            return objc_getAssociatedObject(self, &AssociatedKeys.PinchCenterKey) as? CGPoint ?? CGPoint(x: bounds.midX, y: bounds.midY)
+        }
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.PinchCenterKey, newValue, .OBJC_ASSOCIATION_RETAIN)
+        }
+    }
+    
     /// Initialize pinch & pan gestures
     private func inititialize() {
         pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(imagePinched(_:)))
@@ -84,16 +94,20 @@ public extension UIImageView {
     ///
     /// - Parameter sender: UIPinvhGestureRecognizer
     @objc private func imagePinched(_ pinch: UIPinchGestureRecognizer) {
-        if pinch.scale >= 1.0 {
-            scale = pinch.scale
-            transform(withTranslation: .zero)
+        switch pinch.state {
+        case .began:
+            pinchCenter = CGPoint(x: pinch.location(in: self).x - bounds.midX,
+                                  y: pinch.location(in: self).y - bounds.midY)
+        case .changed:
+            if pinch.scale >= 1.0 {
+                scale = pinch.scale
+                transform(withTranslation: .zero)
+            }
+        default:
+            reset()
         }
-
-        if pinch.state != .ended { return }
-
-        reset()
     }
-
+    
     /// Perform the panning if needed
     ///
     /// - Parameter sender: UIPanGestureRecognizer
@@ -114,15 +128,17 @@ public extension UIImageView {
             self.transform = .identity
         }
     }
-
+    
     /// Will transform the image with the appropriate
     /// scale or translation.
     ///
     /// Parameter translation: CGPoint
     private func transform(withTranslation translation: CGPoint) {
         var transform = CATransform3DIdentity
+        transform = CATransform3DTranslate(transform, pinchCenter.x * (1-scale), pinchCenter.y * (1-scale), 0)
         transform = CATransform3DScale(transform, scale, scale, 1.01)
         transform = CATransform3DTranslate(transform, translation.x, translation.y, 0)
+        
         layer.transform = transform
     }
 }
